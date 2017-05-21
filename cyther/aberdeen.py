@@ -12,8 +12,8 @@ def display_resources():
     to test cyther (randomtreetest.c) was included
     """
     from .tools import find_resource
-    print("Resource 'randomtreetest.c': {}"
-          "".format(find_resource('randomtreetest.c')))
+    print(("Resource 'randomtreetest.c': {}"
+          "".format(find_resource('randomtreetest.c'))))
 
 
 def display_configure():
@@ -22,7 +22,7 @@ def display_configure():
     """
 
     from .configuration import generate_configurations
-    print(generate_configurations(save=True))
+    print((generate_configurations(save=True)))
 
     # '/opt/python/3.6.0/include/python3.6m/Python.h'
 

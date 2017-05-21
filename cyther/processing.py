@@ -123,18 +123,18 @@ def cytherize(args, file):
 
     if args['watch']:
         if response['returncode'] == 1:
-            print(response['output'] + '\n')
+            print((response['output'] + '\n'))
         else:
             if response['output']:
-                print(response['output'])
+                print((response['output']))
     else:
         if response['returncode'] == 1:
             if args['error']:
                 raise CytherError(response['output'])
             else:
-                print(response['output'])
+                print((response['output']))
         else:
-            print(response['output'])
+            print((response['output']))
 
 
 def run(path, timer=False, repeat=3, number=10000, precision=2):

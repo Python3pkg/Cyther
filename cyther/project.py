@@ -34,7 +34,7 @@ def purge_project():
     """
     Purge a directory of anything cyther related
     """
-    print('Current Directory: {}'.format(os.getcwd()))
+    print(('Current Directory: {}'.format(os.getcwd())))
     directories = os.listdir(os.getcwd())
     if CACHE_NAME in directories:
         response = get_input("Would you like to delete the cache and"
@@ -46,7 +46,7 @@ def purge_project():
             contents = os.listdir(cache_dir)
             if contents:
                 for filename in contents:
-                    print('\t' + filename)
+                    print(('\t' + filename))
                     filepath = os.path.join(cache_dir, filename)
                     to_delete.append(filepath)
             else:
@@ -63,5 +63,5 @@ def purge_project():
         else:
             print("Skipping deletion of the cache")
     else:
-        print("Couldn't find a cache file ('{}') in this "
-              "directory".format(CACHE_NAME))
+        print(("Couldn't find a cache file ('{}') in this "
+              "directory".format(CACHE_NAME)))

@@ -23,11 +23,11 @@ def display_direct():
     """
 
     include_dirs, runtime_dirs, runtime = get_direct_config()
-    print("Include Search Dirs: {}".format(include_dirs))
-    print("\tContents: {}\n".format(get_dir_contents(include_dirs)))
-    print("Runtime Search Dirs: {}".format(runtime_dirs))
-    print("\tContents: {}\n".format(get_dir_contents(runtime_dirs)))
-    print("Runtime Libs: '{}'".format(runtime))
+    print(("Include Search Dirs: {}".format(include_dirs)))
+    print(("\tContents: {}\n".format(get_dir_contents(include_dirs))))
+    print(("Runtime Search Dirs: {}".format(runtime_dirs)))
+    print(("\tContents: {}\n".format(get_dir_contents(runtime_dirs))))
+    print(("Runtime Libs: '{}'".format(runtime)))
 
 
 def get_direct_config():

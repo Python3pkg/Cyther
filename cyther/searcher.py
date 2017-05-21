@@ -79,7 +79,7 @@ def breadth(dirs):
     """
     while dirs:
         next_dirs = []
-        print("Dirs: '{}'".format(dirs))
+        print(("Dirs: '{}'".format(dirs)))
         for d in dirs:
             next_dirs = []
             try:
@@ -161,8 +161,8 @@ def cachunk(prit=False):
     t1 = bloop(True)
     t2 = bloop(False)
     if prit:
-        print("Time (parallelized): '{}'".format(t1))
-        print("Time (not parallelized): '{}'".format(t2))
+        print(("Time (parallelized): '{}'".format(t1)))
+        print(("Time (not parallelized): '{}'".format(t2)))
 
 
 def test():
@@ -170,9 +170,9 @@ def test():
     t1s = time()
     a = distribute(lambda x: x ** 2, to_process)
     t1e = time()
-    print("Time (parallelized): '{}'".format(t1e - t1s))
+    print(("Time (parallelized): '{}'".format(t1e - t1s)))
     t2s = time()
     b = [x ** 2 for x in to_process]
     t2e = time()
-    print("Time (not parallelized): '{}'".format(t2e - t2s))
+    print(("Time (not parallelized): '{}'".format(t2e - t2s)))
     assert a == b

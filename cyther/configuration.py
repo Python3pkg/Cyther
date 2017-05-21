@@ -59,7 +59,7 @@ def getDirsToInclude(string):
             try:
                 dirs.append('-I{}'.format(eval(module).get_include()))
             except AttributeError:
-                print(NOT_NEEDED_MESSAGE.format(module))
+                print((NOT_NEEDED_MESSAGE.format(module)))
     return dirs
 
 
@@ -279,11 +279,11 @@ RUNTIME_DIRS_PROMPT = "Choose one of the listed runtime search directories " \
 
 def _make_runtime_dirs(*, guided):
     # Dont need to filter on this one
-    print("Calculated runtime name: '{}'".format(_make_full_runtime()))
+    print(("Calculated runtime name: '{}'".format(_make_full_runtime())))
     unfiltered_dirs = find(_make_full_runtime())
-    print("Unfiltered: '{}'".format(unfiltered_dirs))
+    print(("Unfiltered: '{}'".format(unfiltered_dirs)))
     runtime_dirs = _filter_runtime_dirs(unfiltered_dirs)
-    print("Filtered dirs: '{}'".format(runtime_dirs))
+    print(("Filtered dirs: '{}'".format(runtime_dirs)))
 
     if not runtime_dirs:
         raise DirectoryError(DirectoryError.no_runtime_dirs)

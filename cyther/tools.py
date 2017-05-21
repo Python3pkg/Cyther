@@ -6,6 +6,7 @@ a specific theme to them; miscellaneous
 
 import os
 import pkg_resources
+import collections
 
 
 class CytherError(Exception):
@@ -91,7 +92,7 @@ def write_dict_to_file(file_path, obj):
     Write a dictionary of string keys to a file
     """
     lines = []
-    for key, value in obj.items():
+    for key, value in list(obj.items()):
         lines.append(key + ':' + repr(value) + '\n')
 
     with open(file_path, 'w+') as file:
@@ -141,17 +142,17 @@ def get_input(prompt, check, *, redo_prompt=None, repeat_prompt=False):
         redo_prompt = "Incorrect input, please choose from {}: " \
                       "".format(str(check))
 
-    if callable(check):
+    if isinstance(check, collections.Callable):
         def _checker(r): return check(r)
     elif isinstance(check, tuple):
         def _checker(r): return r in check
     else:
         raise ValueError(RESPONSES_ERROR.format(type(check)))
 
-    response = input(prompt)
+    response = eval(input(prompt))
     while not _checker(response):
-        print(response, type(response))
-        response = input(redo_prompt if redo_prompt else prompt)
+        print((response, type(response)))
+        response = eval(input(redo_prompt if redo_prompt else prompt))
     return response
 
 
@@ -164,7 +165,7 @@ def get_choice(prompt, choices):
     checker = []
     for offset, choice in enumerate(choices):
         number = offset + 1
-        print("\t{}): '{}'\n".format(number, choice))
+        print(("\t{}): '{}'\n".format(number, choice)))
         checker.append(str(number))
 
     response = get_input(prompt, tuple(checker) + ('',))
@@ -200,7 +201,7 @@ def generateBatches(tasks, givens):
     batches = []
     while tasks:
         batch = set()
-        for task, dependencies in tasks.items():
+        for task, dependencies in list(tasks.items()):
             if not dependencies:
                 batch.add(task)
 
@@ -210,7 +211,7 @@ def generateBatches(tasks, givens):
         for task in batch:
             del tasks[task]
 
-        for task, dependencies in tasks.items():
+        for task, dependencies in list(tasks.items()):
             for item in batch:
                 if item in dependencies:
                     tasks[task].remove(item)
@@ -225,7 +226,7 @@ GIVENS_NOT_SPECIFIED = "The dependencies '{}' should be givens if not " \
 
 def _batchErrorProcessing(tasks):
     should_be_givens = []
-    total_deps = {dep for deps in tasks.values() for dep in deps}
+    total_deps = {dep for deps in list(tasks.values()) for dep in deps}
     for dep in total_deps:
         if dep not in tasks:
             should_be_givens.append(dep)
@@ -236,7 +237,7 @@ def _batchErrorProcessing(tasks):
     else:
         message = "Circular dependency found:\n\t"
         msg = []
-        for task, dependencies in tasks.items():
+        for task, dependencies in list(tasks.items()):
             for parent in dependencies:
                 line = "{} -> {}".format(task, parent)
                 msg.append(line)
